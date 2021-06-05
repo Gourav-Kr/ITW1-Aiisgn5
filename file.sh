@@ -38,12 +38,13 @@ if [ $choice -eq 1 ]
   read f
   for file in $f 
   do
-  while [ ! -f $file  ]
-   do
+  if [ ! -f $file  ]
+  then
     printf "$file :\n" 
     printf  "\033[1;33mInvalid FIle:\033[0m "
-   done
-  echo -e "\033[1;32\mcontent of $file :\033[0m\n\n `cat $file`" | less -r --prompt="Press q to exit"
+  else
+  echo -e "\033[1;32mcontent of $file :\033[0m\n\n `cat $file`" | less -r --prompt="Press q to exit"
+  fi
   done
   echo "" 
  fi 
@@ -100,12 +101,13 @@ if [ $choice -eq  5 ]
   read f
   for file in $f 
   do
-  while [ ! -f $file  ]
-   do
+  if [ ! -f $file  ]
+   then
     printf "$file :\n" 
     printf  "\033[1;33mInvalid FIle:\033[0m "
-   done
-  echo -e "\033[1;32mSize Of $file is :\033[0m\n\n `ls -hs $file`" | less -r --prompt="Press q to exit"
+  else
+  echo -e "\n\033[1;32mSize Of $file is :\033[0m `ls -hs $file | cut -d " " -f1`" 
+  fi
   done
   echo "" 
  fi 
