@@ -1,8 +1,8 @@
 #!/bin/bash
 if [ $1 -eq 1 ];
 then
-printf "\n\t\t\t\033[1;7;36mTEXT PROCESSING COMMANDS\033[0m\n\n\n  1 -- Search a file for a pattern
-  2 -- Count lines, words, and characters in specified files
+printf "\n\t\t\t\033[1;7;36mTEXT PROCESSING COMMANDS\e[1;31m(Expert Mode)\e\033[0m\n\n\n  1 -- Search a file for a pattern
+  2 -- Count lines, words, and characters in specified file
   3 -- Display line differences between two files
   \033[1;31m4 -- Exit the program\033[0m
 " | more
@@ -36,20 +36,24 @@ then
 
 elif [ "$opt" -eq 2 ];
 then
-    printf "Enter filename : "
-    read filename
-    while [ ! -f $filename  ]
-    do 
-      printf  "\033[1;33mEnter Valid Path:\033[0m "
-      read filename
-    done  
+  printf "Enter filename : "
+  read f
+  for file in $f 
+  do
+  if [ ! -f $file  ]
+   then
+    printf  "\033[1;33m$file is Invalid FIle:\033[0m "
+  else
+    echo -e "\n\033[1;32mFor $file is :\033[0m"
     printf  "Number of line : "
-    wc -l $filename | cut -d " " -f1
+    wc -l $file | cut -d " " -f1
     printf  "Number of words : "
-    wc -w $filename | cut -d " " -f1
+    wc -w $file | cut -d " " -f1
     printf  "Number of characters : "
-    wc -c $filename | cut -d " " -f1
-    echo ""
+    wc -c $file | cut -d " " -f1
+  fi
+  done
+  echo "" 
 
 elif [ "$opt" -eq 3 ];
 then
@@ -67,7 +71,7 @@ then
     printf "\033[1;33mEnter Valid Path:\033[0m "
     read file2
    done  
-    diff $file1 $file2
+    diff $file1 $file2 | less --prompt="Press q to exit"
     printf "\n"
 
 
