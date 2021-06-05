@@ -35,13 +35,16 @@ while [ $choice -ne 1 -a $choice -ne 2 -a $choice -ne 3 -a $choice -ne 4 -a $cho
 if [ $choice -eq 1 ]
  then
   printf  'Enter the Path of File which you want to view: '   
-  read file
+  read f
+  for file in $f 
+  do
   while [ ! -f $file  ]
-   do 
-    printf  "\033[1;33mEnter Valid Path:\033[0m "
-    read file
-   done  
-  cat $file | less --prompt="Press q to exit"
+   do
+    printf "$file :\n" 
+    printf  "\033[1;33mInvalid FIle:\033[0m "
+   done
+  echo -e "\033[1;32\mcontent of $file :\033[0m\n\n `cat $file`" | less -r --prompt="Press q to exit"
+  done
   echo "" 
  fi 
 
@@ -86,11 +89,6 @@ if [ $choice -eq  4 ]
  then 
   printf  'Enter the Path of File which you want to list: '   
   read file
-  while [ ! -f $file  ]
-   do 
-    printf  "\033[1;33mEnter Valid Path:\033[0m "
-    read file
-   done  
   ls  -l $file
   echo ""
  fi
@@ -99,14 +97,17 @@ if [ $choice -eq  4 ]
 if [ $choice -eq  5 ]
  then 
   printf  'Enter the Path of File: '   
-  read file
+  read f
+  for file in $f 
+  do
   while [ ! -f $file  ]
-   do 
-    printf  "\033[1;33mEnter Valid Path:\033[0m "
-    read file
-   done  
-  ls -sh $file | cut -d " " -f1
-  echo ""
+   do
+    printf "$file :\n" 
+    printf  "\033[1;33mInvalid FIle:\033[0m "
+   done
+  echo -e "\033[1;32mSize Of $file is :\033[0m\n\n `ls -hs $file`" | less -r --prompt="Press q to exit"
+  done
+  echo "" 
  fi 
 
 
@@ -127,4 +128,3 @@ fi
 printf "\033[1;34mSelect from above options :\033[0m"
    read choice      
 done
-
