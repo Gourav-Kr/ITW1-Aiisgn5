@@ -2,18 +2,18 @@
 
 if [ $1 -eq 1 ];
 then
-printf "\n\t\t\t\033[1;7;36mSYSTEM STATUS COMMANDS\033[0m\n\n\n  1 -- Display the current date and time
+printf "\n\t\t\t\033[1;7;36mSYSTEM STATUS COMMANDS\e[1;31m(Expert Mode)\e\033[0m\n\n\n  1 -- Display the current date and time
   2 -- Current disk usage
   3 -- List current local and enviornmental
   4 -- Display process status information
-  5 \033[1;31m-- Exit Program\033[0m
+  \033[1;31m5-- Exit Program\033[0m
 " | more
 else
 printf "\n\t\t\t\033[1;7;36mSYSTEM STATUS COMMANDS\033[0m\n\n\n  1 -- Display the current date and time
   2 -- Current disk usage
   3 -- List current local and enviornmental
   4 -- Display process status information
-  5 \033[1;31m-- Quit -- Return to Main Menu\033[0m
+  \033[1;31m5-- Quit -- Return to Main Menu\033[0m
 " | more
 fi
 printf  "\n\033[1;35mEnter your choice:\033[0m " 
@@ -29,17 +29,17 @@ then
 elif [ "$a" -eq 2 ];
 then
     echo ""
-    df | more
+    df | less --prompt="Press q to exit"
     echo ""
 elif [ "$a" -eq 3 ];
 then
      echo ""
-     printenv | more
+     printenv | less --prompt="Press q to exit"
      echo ""
 elif [ "$a" -eq 4 ];
 then
     echo ""
-    ps -e | more
+    ps -e | less --prompt="Press q to exit"
     echo ""
 elif [ "$a" -eq 5 -a "$1" -eq 0 ];
 then
