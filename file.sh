@@ -1,15 +1,19 @@
+if [ "$1" == "1" ]
+ then
+  printf "\n     \t\t   \033[7;1;36mFILE AND DIRECTORY MANAGEMENT COMMANDS\e[1;31m(Expert Mode)\e\033[0m      \n\n"
+  printf "  1 -- Display the contents of a file\n"
+  printf "  2 -- Remove a file\n"
+  printf "  3 -- Copy a file\n"
+  printf "  4 -- List a file\n"
+  printf "  5 -- Size of a file\n" 
+  printf "  \033[1;31m6 -- Exit the program\033[0m\n"
+else  
 printf "\n     \t\t   \033[7;1;36mFILE AND DIRECTORY MANAGEMENT COMMANDS\033[0m      \n\n"
 printf "  1 -- Display the contents of a file\n"
 printf "  2 -- Remove a file\n"
 printf "  3 -- Copy a file\n"
 printf "  4 -- List a file\n"
 printf "  5 -- Size of a file\n"
-
-
-if [ "$1" == "1" ]
- then 
-  printf "  \033[1;31m6 -- Exit the program\033[0m\n"
-else  
  printf "  \033[1;31m6 -- Quit -- Return to main Menu\033[0m\n"
  fi
 
@@ -37,7 +41,7 @@ if [ $choice -eq 1 ]
     printf  "\033[1;33mEnter Valid Path:\033[0m "
     read file
    done  
-  cat $file
+  cat $file | less --prompt="Press q to exit"
   echo "" 
  fi 
 
@@ -73,7 +77,7 @@ if [ $choice -eq 3 ]
     printf "\033[1;33mEnter Valid Path:\033[0m "
     read file2
    done  
-  cp $file1 $file2
+  cp $file1 $file2 
   printf "$file1 copied to $file2\n"
 fi 
 
@@ -123,3 +127,4 @@ fi
 printf "\033[1;34mSelect from above options :\033[0m"
    read choice      
 done
+
